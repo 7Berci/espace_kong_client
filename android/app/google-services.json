@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "635951895712",
+    "project_id": "espace-kong",
+    "storage_bucket": "espace-kong.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:635951895712:android:80acf6b9a00ba261e325c5",
+        "android_client_info": {
+          "package_name": "com.ftk.espace_kong"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5wrPW55rS9pc_fcrU0yu4LnjB_5K0zGw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
