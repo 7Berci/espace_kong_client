@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:espace_kong/home_folder/tarifs.dart';
+import 'package:espace_kong/pressing_folder/archives.dart';
 import 'package:espace_kong/pressing_folder/demande_page.dart';
 import 'package:espace_kong/slider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -108,13 +109,27 @@ class HomePressingView extends State<HomePressing> {
                   ),
                   const SizedBox(height: 40.0),
                   Center(
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => Tarifs()),
-                        );
-                      },
-                      child: Text("Voir les tarifs"),
+                    child: Row(
+                      children: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(builder: (context) => Tarifs()),
+                            );
+                          },
+                          child: Text("Voir les tarifs"),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => Archives(),
+                              ),
+                            );
+                          },
+                          child: Text("Archives de commandes"),
+                        ),
+                      ],
                     ),
                   ),
                 ],
