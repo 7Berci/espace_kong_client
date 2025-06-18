@@ -4,15 +4,27 @@ import 'package:espace_kong/culture_folder/articles_model_list.dart';
 import 'package:flutter/material.dart';
 
 class HomeCulture extends StatelessWidget {
+  const HomeCulture({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Culture & Blog')),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.orangeAccent,
+        title: const Center(
+          // child: Text('Que voulez-vous laver ?')
+          child: Text(
+            'Culture & Blog',
+            style: TextStyle(fontSize: 18, color: Colors.white),
+          ),
+        ),
+      ),
       body: StreamBuilder<QuerySnapshot>(
         stream:
             FirebaseFirestore.instance
                 .collection('articles')
-                .orderBy('createdAt', descending: false)
+                .orderBy('id', descending: false)
                 .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {

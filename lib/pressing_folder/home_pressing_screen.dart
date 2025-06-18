@@ -91,7 +91,7 @@ class HomePressingView extends State<HomePressing> {
         title: const Center(
           // child: Text('Que voulez-vous laver ?')
           child: Text(
-            'ePressing de Kong',
+            'Pressing FTK',
             style: TextStyle(fontSize: 18, color: Colors.white),
           ),
         ),
@@ -147,29 +147,26 @@ class HomePressingView extends State<HomePressing> {
                     ),
                   ),
                   const SizedBox(height: 40.0),
-                  Center(
-                    child: Row(
-                      children: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(builder: (context) => Tarifs()),
-                            );
-                          },
-                          child: Text("Voir les tarifs"),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => Archives(),
-                              ),
-                            );
-                          },
-                          child: Text("Archives de commandes"),
-                        ),
-                      ],
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(builder: (context) => Tarifs()),
+                          );
+                        },
+                        child: Text("Voir les tarifs"),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(builder: (context) => Archives()),
+                          );
+                        },
+                        child: Text("Archives de commandes"),
+                      ),
+                    ],
                   ),
                 ],
               ),

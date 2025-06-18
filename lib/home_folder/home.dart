@@ -1,4 +1,5 @@
 // import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:espace_kong/home_folder/navigation_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -19,7 +20,31 @@ class Home extends StatefulWidget {
 
 class HomeView extends State<Home> {
   int index = 0;
-  // final userr = UserPreferences.myUser;
+  String? phone;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchPhone();
+  }
+
+  Future<void> fetchPhone() async {
+    // Suppose que tu as un seul document dans la collection 'ftkcontact'
+    final snapshot =
+        await FirebaseFirestore.instance.collection('ftk_files').limit(1).get();
+
+    if (snapshot.docs.isNotEmpty) {
+      setState(() {
+        phone = snapshot.docs.first['phone'];
+      });
+    }
+  }
+
+  void callUs() {
+    if (phone != null) {
+      launchUrl(Uri.parse("tel://$phone"));
+    }
+  }
 
   final screens = [HomePressing(), HomeCulture()];
 
@@ -32,13 +57,13 @@ class HomeView extends State<Home> {
         title: const Center(
           // child: Text('Que voulez-vous laver ?')
           child: Text(
-            'Espace Kong',
+            'Bienvenu(e) !',
             style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
           ),
         ),
         actions: [
           IconButton(
-            onPressed: () => launchUrl(Uri.parse("tel://0707104044")),
+            onPressed: callUs,
             // Navigator.of(context)
             //     .pushReplacement(MaterialPageRoute(builder: (context) => Shop()));
             icon: const Icon(Icons.call),
