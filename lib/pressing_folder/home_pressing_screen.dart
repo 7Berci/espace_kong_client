@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:espace_kong/home_folder/tarifs.dart';
 import 'package:espace_kong/pressing_folder/archives.dart';
@@ -14,6 +16,10 @@ class HomePressing extends StatefulWidget {
 }
 
 class HomePressingView extends State<HomePressing> {
+  bool _isButtonDisabled = false;
+  int _secondsLeft = 0;
+  Timer? _timer;
+
   void askOrder() async {
     final uid = FirebaseAuth.instance.currentUser?.uid;
 
@@ -53,6 +59,27 @@ class HomePressingView extends State<HomePressing> {
     Navigator.of(
       context,
     ).push(MaterialPageRoute(builder: (context) => DemandeEnvoyee()));
+
+    // Désactive le bouton pour 2 minutes
+    setState(() {
+      _isButtonDisabled = true;
+      _secondsLeft = 120;
+    });
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {
+        _secondsLeft--;
+        if (_secondsLeft <= 0) {
+          _isButtonDisabled = false;
+          _timer?.cancel();
+        }
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
   }
 
   @override
@@ -93,7 +120,7 @@ class HomePressingView extends State<HomePressing> {
                   const SizedBox(height: 37.0),
                   Center(
                     child: ElevatedButton(
-                      onPressed: askOrder,
+                      onPressed: _isButtonDisabled ? null : askOrder,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.orangeAccent,
                         shape: RoundedRectangleBorder(
@@ -101,10 +128,22 @@ class HomePressingView extends State<HomePressing> {
                         ),
                         padding: EdgeInsets.all(16.0),
                       ),
-                      child: const Text(
-                        'Venez chercher mes habits',
-                        style: TextStyle(color: Colors.white, fontSize: 18.0),
-                      ),
+                      child:
+                          _isButtonDisabled
+                              ? Text(
+                                'Veuillez patienter $_secondsLeft s',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18.0,
+                                ),
+                              )
+                              : const Text(
+                                'Venez chercher mes habits',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18.0,
+                                ),
+                              ),
                     ),
                   ),
                   const SizedBox(height: 40.0),
