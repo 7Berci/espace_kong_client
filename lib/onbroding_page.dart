@@ -44,19 +44,23 @@ class OnBrodingPage extends StatelessWidget {
       ],
       done: const Text(
         'Commencer',
-        style: TextStyle(fontWeight: FontWeight.bold),
+        style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF005C9F)),
       ),
       onDone: () async {
-        goToHome(context);
         final prefs = await SharedPreferences.getInstance();
         prefs.setBool('showHome', true);
+        goToHome(context);
       },
       showSkipButton: true,
-      skip: const Text('Passer'),
+      skip: const Text('Passer', style: TextStyle(color: Color(0xFF005C9F))),
       // skipFlex: 0,
       // nextFlex: 0,
-      onSkip: () => goToHome(context),
-      next: const Icon(Icons.arrow_forward),
+      onSkip: () async {
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setBool('showHome', true);
+        goToHome(context);
+      },
+      next: const Icon(Icons.arrow_forward, color: Color(0xFF005C9F)),
       dotsDecorator: getDotDecoration(),
       // isProgress: false,
       // isProgressTap: false,
@@ -90,8 +94,8 @@ class OnBrodingPage extends StatelessWidget {
 }
 
 DotsDecorator getDotDecoration() => DotsDecorator(
-  color: const Color(0xFF5ACC80),
-  activeColor: Colors.yellow,
+  color: const Color(0xFF1C89E8),
+  activeColor: Color(0xFF005C9F),
   size: const Size(10, 10),
   activeSize: const Size(22, 10),
   activeShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
@@ -101,12 +105,12 @@ const getPageDecoration = PageDecoration(
   titleTextStyle: TextStyle(
     fontSize: 28,
     fontWeight: FontWeight.bold,
-    color: Colors.white,
+    color: Color(0xFF005C9F),
   ),
   bodyTextStyle: TextStyle(fontSize: 20),
   // descriptionPadding: EdgeInsets.all(16).copyWith(bottom: 0),
   imagePadding: EdgeInsets.all(24),
-  pageColor: Color(0xFF5ACC80),
+  pageColor: Colors.white,
 );
 
 // PageDecoration getPageDecoration() => PageDecoration(

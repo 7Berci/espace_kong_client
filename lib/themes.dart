@@ -1,9 +1,8 @@
-import '../home_folder/home.dart';
 import 'package:flutter/material.dart';
 
 class MyThemes {
-  static final primary = eclatColor;
-  static final primaryColor = eclatColor;
+  static final primary = Color(0xFF005C9F);
+  static final primaryColor = Color(0xFF005C9F);
 
   static final darkTheme = ThemeData(
     scaffoldBackgroundColor: Colors.grey.shade900,

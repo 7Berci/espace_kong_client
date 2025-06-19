@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:espace_kong/home_folder/home.dart';
 import 'package:espace_kong/home_folder/tarifs.dart';
 import 'package:espace_kong/pressing_folder/archives.dart';
 import 'package:espace_kong/pressing_folder/demande_page.dart';
@@ -85,17 +86,39 @@ class HomePressingView extends State<HomePressing> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.orangeAccent,
-        title: const Center(
-          // child: Text('Que voulez-vous laver ?')
-          child: Text(
-            'Pressing FTK',
-            style: TextStyle(fontSize: 18, color: Colors.white),
-          ),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight),
+        child: Column(
+          children: [
+            // Black border (2 pixels high)
+            Container(height: 2, color: Colors.black),
+            // The actual AppBar
+            Expanded(
+              child: AppBar(
+                automaticallyImplyLeading: false,
+                title: const Center(
+                  child: Text(
+                    'Pressing FTK',
+                    style: TextStyle(fontSize: 18, color: Colors.white),
+                  ),
+                ),
+                backgroundColor: ftkColor,
+              ),
+            ),
+          ],
         ),
       ),
+      // AppBar(
+      //   automaticallyImplyLeading: false,
+      //   backgroundColor: ftkColor,
+      //   title: const Center(
+      //     // child: Text('Que voulez-vous laver ?')
+      //     child: Text(
+      //       'Pressing FTK',
+      //       style: TextStyle(fontSize: 18, color: Colors.white),
+      //     ),
+      //   ),
+      // ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -122,7 +145,7 @@ class HomePressingView extends State<HomePressing> {
                     child: ElevatedButton(
                       onPressed: _isButtonDisabled ? null : askOrder,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.orangeAccent,
+                        backgroundColor: Color(0xFF005C9F),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),
                         ),
@@ -156,7 +179,11 @@ class HomePressingView extends State<HomePressing> {
                             MaterialPageRoute(builder: (context) => Tarifs()),
                           );
                         },
-                        child: Text("Voir les tarifs"),
+
+                        child: Text(
+                          "Voir les tarifs",
+                          style: TextStyle(color: Color(0xFF005C9F)),
+                        ),
                       ),
                       ElevatedButton(
                         onPressed: () {
@@ -164,7 +191,10 @@ class HomePressingView extends State<HomePressing> {
                             MaterialPageRoute(builder: (context) => Archives()),
                           );
                         },
-                        child: Text("Archives de commandes"),
+                        child: Text(
+                          "Archives de commandes",
+                          style: TextStyle(color: Color(0xFF005C9F)),
+                        ),
                       ),
                     ],
                   ),

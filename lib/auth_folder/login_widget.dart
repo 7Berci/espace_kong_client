@@ -68,8 +68,15 @@ class LoginWidgetState extends State<LoginWidget> {
             style: ElevatedButton.styleFrom(
               minimumSize: const Size.fromHeight(50),
             ),
-            icon: const Icon(Icons.lock_open, size: 32),
-            label: const Text("Se connecter", style: TextStyle(fontSize: 24)),
+            icon: const Icon(
+              Icons.lock_open,
+              size: 32,
+              color: Color(0xFF005C9F),
+            ),
+            label: const Text(
+              "Se connecter",
+              style: TextStyle(fontSize: 24, color: Color(0xFF005C9F)),
+            ),
           ),
           const SizedBox(height: 24),
           GestureDetector(

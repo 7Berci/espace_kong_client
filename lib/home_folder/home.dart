@@ -9,7 +9,7 @@ import '../culture_folder/home_culture_screen.dart';
 // ignore: depend_on_referenced_packages
 import '../pressing_folder/home_pressing_screen.dart';
 
-Color eclatColor = const Color(0xFF5ACC80);
+Color ftkColor = const Color(0xFF1C89E8);
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -53,12 +53,16 @@ class HomeView extends State<Home> {
     return Scaffold(
       drawer: const MyNavigationDrawer(),
       appBar: AppBar(
-        backgroundColor: eclatColor,
+        backgroundColor: ftkColor,
         title: const Center(
           // child: Text('Que voulez-vous laver ?')
           child: Text(
             'Bienvenu(e) !',
-            style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
           ),
         ),
         actions: [
@@ -85,7 +89,7 @@ class HomeView extends State<Home> {
           height: 60.0,
           backgroundColor:
               // userr.isDarkMode ? Colors.grey.shade900 : Colors.white,
-              eclatColor,
+              ftkColor,
           destinations: const [
             NavigationDestination(
               icon: Icon(Icons.local_laundry_service),

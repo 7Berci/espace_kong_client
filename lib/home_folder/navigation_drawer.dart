@@ -55,7 +55,7 @@ class _MyNavigationDrawerState extends State<MyNavigationDrawer> {
   );
 
   Widget buildHeader(BuildContext context) => Material(
-    color: Colors.orangeAccent,
+    color: ftkColor,
     child: InkWell(
       // onTap: () {
       //   Navigator.pop(context);
@@ -155,7 +155,7 @@ Widget toShowPicture(String image) {
     width: 40.0,
     height: 40.0,
     decoration: BoxDecoration(
-      color: eclatColor,
+      color: ftkColor,
       borderRadius: BorderRadius.circular(10.0),
     ),
     child: Center(

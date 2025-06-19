@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:espace_kong/culture_folder/article_screen.dart';
 import 'package:espace_kong/culture_folder/articles_model_list.dart';
+import 'package:espace_kong/home_folder/home.dart';
 import 'package:flutter/material.dart';
 
 class HomeCulture extends StatelessWidget {
@@ -9,15 +10,26 @@ class HomeCulture extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.orangeAccent,
-        title: const Center(
-          // child: Text('Que voulez-vous laver ?')
-          child: Text(
-            'Culture & Blog',
-            style: TextStyle(fontSize: 18, color: Colors.white),
-          ),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight),
+        child: Column(
+          children: [
+            // Black border (2 pixels high)
+            Container(height: 2, color: Colors.black),
+            // The actual AppBar
+            Expanded(
+              child: AppBar(
+                automaticallyImplyLeading: false,
+                title: const Center(
+                  child: Text(
+                    'Culture & Blog',
+                    style: TextStyle(fontSize: 18, color: Colors.white),
+                  ),
+                ),
+                backgroundColor: ftkColor,
+              ),
+            ),
+          ],
         ),
       ),
       body: StreamBuilder<QuerySnapshot>(
@@ -50,11 +62,25 @@ class HomeCulture extends StatelessWidget {
                 child: ListTile(
                   leading: Image.network(
                     article.thumbnailUrl,
-                    width: 60,
-                    height: 60,
+                    width: 56,
+                    height: 56,
                     fit: BoxFit.cover,
+                    errorBuilder:
+                        (context, error, stackTrace) =>
+                            Icon(Icons.image_not_supported),
                   ),
                   title: Text(article.title),
+                  trailing: TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ArticlePage(article: article),
+                        ),
+                      );
+                    },
+                    child: Text('Voir'),
+                  ),
                   onTap: () {
                     Navigator.push(
                       context,
