@@ -18,25 +18,29 @@ class OnBrodingPage extends StatelessWidget {
         PageViewModel(
           title: 'Restez chez vous et on vous sert!',
           body:
-              "Nous sommes à notre service pour offrir un service de qualité.",
+              "Nous sommes à votre service, disponibles du lundi au samedi, de 8h à 20h, pour vous offrir des services de qualité.",
           image: buildImage('assets/images/onBoard2.png'),
           decoration: getPageDecoration,
         ),
         PageViewModel(
           title: 'Lavage à sec et repassage',
-          body: 'Gardez vos vêtements propres et secs',
+          body:
+              'Avec nous, gardez vos vêtements propres, secs, avec une très belle odeur et très bien repassé, tout ça en un seul clic.',
           image: buildImage('assets/images/onBoard3.png'),
           decoration: getPageDecoration,
         ),
         PageViewModel(
           title: 'Offres adaptées à tous types de budgets',
-          body: 'Les hôtels et structures bénéficient de tarifs particuliers',
+          body:
+              '15% de réduction pour 10 articles et 20% pour 20 articles à laver, sans compter les nombreuses surprises pour les abonnés.',
+          //body: 'Les hôtels et structures bénéficient de tarifs particuliers',
           image: buildImage('assets/images/onBoard5.png'),
           decoration: getPageDecoration,
         ),
         PageViewModel(
           title: 'Un pressing autrement',
-          body: "Des solutions extraordinaires vous attendent !",
+          body:
+              "Des solutions extraordinaires vous attendent ! \n Fangan Tech est avec vous pour des solutions utiles et personnalisées.",
           //les futurs abonnés premium FTK Pressing bénéficient de livraisons gratuites !
           image: buildImage('assets/images/onBoard6.jpg'),
           decoration: getPageDecoration,

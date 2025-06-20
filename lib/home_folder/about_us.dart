@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:espace_kong/home_folder/home.dart';
 import 'package:flutter/material.dart';
 // ignore: depend_on_referenced_packages
 import 'package:url_launcher/url_launcher.dart';
@@ -40,25 +41,32 @@ class _AboutUsState extends State<AboutUs> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('A propos de nous')),
+      appBar: myAppBar('A propos de nous', true),
       body: ListView(
         children: [
           //SamplePlayer(),
-          Text(
-            "Notre entreprise",
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).colorScheme.primary,
+          const SizedBox(height: 16.0),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              "Notre entreprise :",
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).colorScheme.primary,
+              ),
             ),
           ),
           const SizedBox(height: 12),
-          const Text(
-            "Espace Kong est une entreprise locale spécialisée dans le pressing et les services de blanchisserie. "
-            "Notre mission est de faciliter la vie de nos clients en leur offrant un service rapide, fiable et de qualité, "
-            "adapté à leurs besoins quotidiens. Nous mettons un point d'honneur à la satisfaction de notre clientèle, "
-            "en proposant des solutions innovantes et un accompagnement personnalisé. Faites confiance à notre équipe passionnée pour prendre soin de vos vêtements !",
-            style: TextStyle(fontSize: 18),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: const Text(
+              "Espace Kong est une entreprise locale spécialisée dans le pressing et les services de blanchisserie. "
+              "Notre mission est de faciliter la vie de nos clients en leur offrant un service rapide, fiable et de qualité, "
+              "adapté à leurs besoins quotidiens. Nous mettons un point d'honneur à la satisfaction de notre clientèle, "
+              "en proposant des solutions innovantes et un accompagnement personnalisé. Faites confiance à notre équipe passionnée pour prendre soin de vos vêtements !",
+              style: TextStyle(fontSize: 18),
+            ),
           ),
           const SizedBox(height: 24),
           ElevatedButton.icon(

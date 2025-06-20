@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:espace_kong/home_folder/home.dart';
 import 'package:firebase_auth/firebase_auth.dart'; // Ajoute cet import si manquant
 import 'package:flutter/material.dart';
 
@@ -11,7 +12,7 @@ class Archives extends StatelessWidget {
     String? email = user?.email;
 
     return Scaffold(
-      appBar: AppBar(title: Text('Produits archivés')),
+      appBar: myAppBar('Produits archivés', true),
       body: StreamBuilder<QuerySnapshot>(
         stream:
             FirebaseFirestore.instance

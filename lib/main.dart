@@ -1,5 +1,7 @@
 import 'package:animated_theme_switcher/animated_theme_switcher.dart';
+import 'package:espace_kong/auth_folder/auth_page.dart';
 import 'package:espace_kong/home_folder/home.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -71,7 +73,7 @@ class MyApp extends StatelessWidget {
   final bool showHome;
 
   MyApp({super.key, required this.showHome});
-  static const String title = "Eclat d'Afrik";
+  static const String title = "Pressing FTK";
   // final userr = UserPreferences.myUser;
   Utils utilsInstance = Utils();
 
@@ -88,10 +90,13 @@ class MyApp extends StatelessWidget {
             // theme: ThemeProvider.of(context),
             // theme: userr.isDarkMode ? MyThemes.darkTheme : MyThemes.lightTheme,
             theme: MyThemes.lightTheme,
-            //theme: ThemeData(primaryColor: Color(0xFF005C9F)),
             title: title,
-            home: showHome ? Home() : OnBrodingPage(),
-            // home: showHome ? const AuthPage() : OnBrodingPage(),
+            home:
+                showHome
+                    ? (FirebaseAuth.instance.currentUser == null
+                        ? AuthPage()
+                        : Home())
+                    : OnBrodingPage(),
             builder: EasyLoading.init(),
           ),
     ),

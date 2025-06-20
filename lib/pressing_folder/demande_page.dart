@@ -1,10 +1,9 @@
 // import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:espace_kong/home_folder/home.dart';
 import 'package:espace_kong/home_folder/navigation_drawer.dart';
-import 'package:espace_kong/home_folder/tarifs.dart';
+import 'package:espace_kong/pressing_folder/details_commandes_screen.dart';
 import 'package:flutter/material.dart';
 //import 'package:shared_preferences/shared_preferences.dart';
-// ignore: depend_on_referenced_packages
 import 'package:url_launcher/url_launcher.dart';
 
 class DemandeEnvoyee extends StatefulWidget {
@@ -18,14 +17,17 @@ class DemandeEnvoyeeView extends State<DemandeEnvoyee> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const MyNavigationDrawer(),
       appBar: AppBar(
         backgroundColor: ftkColor,
-        title: const Center(
+        title: Center(
           // child: Text('Que voulez-vous laver ?')
           child: Text(
-            'Demande de pressing',
-            style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+            'Demande envoyée!',
+            style: TextStyle(
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
           ),
         ),
         actions: [
@@ -44,8 +46,8 @@ class DemandeEnvoyeeView extends State<DemandeEnvoyee> {
             const SizedBox(height: 29.0),
             Image.asset(
               'assets/images/validate.png',
-              width: 120,
-              height: 120,
+              width: 60,
+              height: 60,
               fit: BoxFit.cover,
             ),
             const SizedBox(height: 20.0),
@@ -59,13 +61,19 @@ class DemandeEnvoyeeView extends State<DemandeEnvoyee> {
               ),
             ),
             const SizedBox(height: 20.0),
-            TextButton(
+            MaterialButton(
+              color: ftkColor,
               onPressed: () {
-                Navigator.of(
-                  context,
-                ).push(MaterialPageRoute(builder: (context) => Tarifs()));
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => CommandeDetailsScreen(),
+                  ),
+                );
               },
-              child: const Text('Page de commande'),
+              child: const Text(
+                'Page de commandes',
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ],
         ),

@@ -1,10 +1,9 @@
 // ignore: depend_on_referenced_packages
+import 'package:espace_kong/home_folder/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
-// ignore: import_of_legacy_library_into_null_safe
-import '../main.dart';
 import 'forgotpassword_page.dart';
 import 'signin_withphone_page.dart';
 import 'signup_widget.dart';
@@ -39,9 +38,9 @@ class LoginWidgetState extends State<LoginWidget> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const SizedBox(height: 60),
+          const SizedBox(height: 2.0),
           ftkLogo(200.0),
-          const SizedBox(height: 20),
+          const SizedBox(height: 2.0),
           const Text(
             "Bon retour !",
             textAlign: TextAlign.center,
@@ -67,15 +66,16 @@ class LoginWidgetState extends State<LoginWidget> {
             onPressed: signIn,
             style: ElevatedButton.styleFrom(
               minimumSize: const Size.fromHeight(50),
+              backgroundColor: ftkColor,
+              // side: BorderSide(
+              //   color: ftkColor, // Border color
+              //   width: 2, // Border width
+              // ),
             ),
-            icon: const Icon(
-              Icons.lock_open,
-              size: 32,
-              color: Color(0xFF005C9F),
-            ),
+            icon: const Icon(Icons.lock_open, size: 32, color: Colors.white),
             label: const Text(
               "Se connecter",
-              style: TextStyle(fontSize: 24, color: Color(0xFF005C9F)),
+              style: TextStyle(fontSize: 20.0, color: Colors.white),
             ),
           ),
           const SizedBox(height: 24),
@@ -84,8 +84,8 @@ class LoginWidgetState extends State<LoginWidget> {
               "Mot de passe oublié ?",
               style: TextStyle(
                 decoration: TextDecoration.underline,
-                color: Theme.of(context).colorScheme.secondary,
-                fontSize: 20,
+                color: Colors.black,
+                fontSize: 16,
               ),
             ),
             onTap:
@@ -95,63 +95,44 @@ class LoginWidgetState extends State<LoginWidget> {
                   ),
                 ),
           ),
-          const SizedBox(height: 24),
-          // Row(
-          //   children: [
-          //     Text('Pas de compte ? '),
-          //     TextButton(
-          //       onPressed: () {
-          //         Navigator.of(context).pushReplacement(MaterialPageRoute(
-          //             builder: (builder) => SignUpWidget()));
-          //       },
-          //       child: Text(
-          //         "S'inscrire",
-          //         style: const TextStyle(
-          //           decoration: TextDecoration.underline,
-          //           color: Theme.of(context).colorScheme.secondary,
-          //         ),
-          //       ),
-          //     ),
-          //   ],
-          // ),
-          RichText(
-            text: TextSpan(
-              style: TextStyle(color: Colors.grey.shade400, fontSize: 16),
-              text: 'Pas de compte ?  ',
-              children: [
-                TextSpan(
-                  recognizer:
-                      TapGestureRecognizer()..onTap = widget.onClickedSignUp,
-                  text: "S'inscrire",
-                  style: TextStyle(
-                    decoration: TextDecoration.underline,
-                    color: Theme.of(context).colorScheme.secondary,
-                  ),
+          const SizedBox(height: 50.0),
+          Text("Pas de compte ?", style: TextStyle(fontSize: 16)),
+          const SizedBox(height: 8),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton.icon(
+              onPressed:
+                  widget.onClickedSignUp, // Your function to switch to sign up
+              icon: Icon(Icons.person_add, color: Colors.white),
+              label: Text(
+                "S'inscrire",
+                style: TextStyle(fontSize: 18, color: Colors.white),
+              ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.orangeAccent,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
                 ),
-              ],
+                padding: EdgeInsets.symmetric(vertical: 14),
+              ),
             ),
           ),
-          // const SizedBox(height: 24),
-          // Column(
-          //   children: [
-          //     Text(
-          //       "Pour l'authentification par numéro téléphonique, ",
-          //       style: const TextStyle(color: Colors.grey.shade400, fontSize: 16),
-          //     ),
-          //     TextButton(
-          //       onPressed: () {
-          //         Navigator.of(context).push(MaterialPageRoute(
-          //             builder: (builder) => SignInView()));
-          //       },
-          //       child: Text(
-          //         "Cliquez-ici",
-          //         style: const TextStyle(
+          // RichText(
+          //   text: TextSpan(
+          //     style: TextStyle(color: Colors.grey.shade400, fontSize: 16),
+          //     text: 'Pas de compte ?  ',
+          //     children: [
+          //       TextSpan(
+          //         recognizer:
+          //             TapGestureRecognizer()..onTap = widget.onClickedSignUp,
+          //         text: "S'inscrire",
+          //         style: TextStyle(
           //           decoration: TextDecoration.underline,
-          //           color: Theme.of(context).colorScheme.primary,
+          //           color: Colors.black,
           //         ),
           //       ),
-          //     ),
-          //   ],
+          //     ],
+          //   ),
           // ),
           const SizedBox(height: 90),
           TextButton(
@@ -174,29 +155,47 @@ class LoginWidgetState extends State<LoginWidget> {
       ),
     ),
   );
-
   Future signIn() async {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) => const Center(child: CircularProgressIndicator()),
-    );
+    EasyLoading.show(status: 'Connexion...');
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
+      EasyLoading.dismiss();
+      Navigator.of(
+        context,
+      ).pushReplacement(MaterialPageRoute(builder: (builder) => Home()));
     } on FirebaseAuthException catch (e) {
-      // ignore: avoid_print
-      print(e);
-
-      utilsWidget.showSnackBar(e.message);
+      EasyLoading.dismiss();
+      SnackBar(content: Text(e.message ?? "Erreur"));
+      //utilsWidget.showSnackBar(e.message);
     }
+    // Future signIn() async {
+    //   showDialog(
+    //     context: context,
+    //     barrierDismissible: false,
+    //     builder: (context) => const Center(child: CircularProgressIndicator()),
+    //   );
+    //   try {
+    //     await FirebaseAuth.instance.signInWithEmailAndPassword(
+    //       email: emailController.text.trim(),
+    //       password: passwordController.text.trim(),
+    //     );
+    //   } on FirebaseAuthException catch (e) {
+    //     // ignore: avoid_print
+    //     print(e);
 
-    //Navigator.of(context) not working!
-    navigatorKey.currentState!.popUntil((route) => route.isFirst);
-    //isFirst
-    // Navigator.of(context)
-    //     .pushReplacement(MaterialPageRoute(builder: (builder) => Shop()));
+    //     utilsWidget.showSnackBar(e.message);
+    //     Navigator.pop(context);
+    //   }
+
+    //   // //Navigator.of(context) not working!
+    //   // navigatorKey.currentState!.popUntil((route) => route.isFirst);
+    //   //isFirst
+    //   Navigator.of(
+    //     context,
+    //   ).pushReplacement(MaterialPageRoute(builder: (builder) => Home()));
+    // }
   }
 }

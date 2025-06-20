@@ -18,6 +18,19 @@ class Home extends StatefulWidget {
   HomeView createState() => HomeView();
 }
 
+PreferredSizeWidget myAppBar(String text, bool back) {
+  return AppBar(
+    automaticallyImplyLeading: back,
+    title: Center(
+      child: Text(
+        text,
+        style: const TextStyle(fontSize: 18, color: Colors.white),
+      ),
+    ),
+    backgroundColor: ftkColor,
+  );
+}
+
 class HomeView extends State<Home> {
   int index = 0;
   String? phone;
@@ -79,9 +92,21 @@ class HomeView extends State<Home> {
       bottomNavigationBar: NavigationBarTheme(
         data: NavigationBarThemeData(
           indicatorColor: Colors.white,
-          labelTextStyle: WidgetStateProperty.all(
-            const TextStyle(fontSize: 14.0, fontWeight: FontWeight.w500),
-          ),
+
+          labelTextStyle: WidgetStateProperty.resolveWith<TextStyle>((states) {
+            if (states.contains(WidgetState.selected)) {
+              return const TextStyle(
+                fontSize: 14.0,
+                fontWeight: FontWeight.w500,
+                color: Colors.white,
+              );
+            }
+            return const TextStyle(
+              fontSize: 14.0,
+              fontWeight: FontWeight.w500,
+              color: Colors.black,
+            );
+          }),
         ),
         child: NavigationBar(
           selectedIndex: index,

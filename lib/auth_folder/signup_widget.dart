@@ -25,6 +25,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   Utils utilsWidget = Utils();
+  bool isFormValid = false;
 
   @override
   void dispose() {
@@ -52,11 +53,11 @@ class _SignUpWidgetState extends State<SignUpWidget> {
               style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 40),
-            const Text(
-              "Inscrivez-vous si vous n'avez pas encore de compte, sinon cliquez sur se connecter !",
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-            ),
+            // const Text(
+            //   "Inscrivez-vous si vous n'avez pas encore de compte, sinon cliquez sur se connecter !",
+            //   textAlign: TextAlign.center,
+            //   style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            // ),
             TextFormField(
               controller: emailController,
               textInputAction: TextInputAction.next,
@@ -67,6 +68,10 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                       email != null && !EmailValidator.validate(email)
                           ? 'Entrez un email valide'
                           : null,
+              onChanged:
+                  (_) => setState(() {
+                    isFormValid = formKey.currentState?.validate() ?? false;
+                  }),
               // cursorColor: Colors.black,
             ),
             const SizedBox(height: 4),
@@ -81,10 +86,14 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                       value != null && value.length < 6
                           ? 'Entrez au moins 6 caractères'
                           : null,
+              onChanged:
+                  (_) => setState(() {
+                    isFormValid = formKey.currentState?.validate() ?? false;
+                  }),
             ),
             const SizedBox(height: 20),
             ElevatedButton.icon(
-              onPressed: signUp,
+              onPressed: isFormValid ? signUp : null,
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size.fromHeight(50),
                 backgroundColor: Color(0xFF005C9F),
@@ -97,7 +106,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
               ),
               label: const Text(
                 "S'inscrire",
-                style: TextStyle(fontSize: 24, color: Color(0xFF005C9F)),
+                style: TextStyle(fontSize: 24, color: Colors.white),
               ),
             ),
             const SizedBox(height: 20),

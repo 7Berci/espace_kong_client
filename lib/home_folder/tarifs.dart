@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:espace_kong/home_folder/home.dart';
 import 'package:flutter/material.dart';
 
 class Tarifs extends StatefulWidget {
@@ -12,7 +13,7 @@ class TarifsView extends State<Tarifs> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Tarifs')),
+      appBar: myAppBar('Tarifs', true),
       body: StreamBuilder<QuerySnapshot>(
         stream:
             FirebaseFirestore.instance

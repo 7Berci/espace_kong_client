@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:espace_kong/auth_folder/enter_number.dart';
 import 'package:espace_kong/home_folder/home.dart';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
@@ -57,12 +58,12 @@ class _MyNavigationDrawerState extends State<MyNavigationDrawer> {
   Widget buildHeader(BuildContext context) => Material(
     color: ftkColor,
     child: InkWell(
-      // onTap: () {
-      //   Navigator.pop(context);
-      //   Navigator.of(context).push(MaterialPageRoute(
-      //     builder: (context) => Profile(),
-      //   ));
-      // },
+      onTap: () {
+        //Navigator.pop(context);
+        Navigator.of(
+          context,
+        ).push(MaterialPageRoute(builder: (context) => EnterNumber()));
+      },
       child: Container(
         padding: EdgeInsets.only(
           top: 24 + MediaQuery.of(context).padding.top,
@@ -103,6 +104,15 @@ class _MyNavigationDrawerState extends State<MyNavigationDrawer> {
     child: Wrap(
       runSpacing: 16, //vertical spacing
       children: [
+        ListTile(
+          leading: const Icon(Icons.person),
+          title: const Text('Modifier mes informations'),
+          onTap: () {
+            Navigator.of(
+              context,
+            ).push(MaterialPageRoute(builder: (context) => EnterNumber()));
+          },
+        ),
         ListTile(
           leading: const Icon(Icons.ios_share_rounded),
           title: const Text('Inviter un ami à Pressing FTK'),
