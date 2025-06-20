@@ -1,4 +1,4 @@
-package com.example.espace_kong
+package com.ftk.espace_kong
 
 import io.flutter.embedding.android.FlutterActivity
 
