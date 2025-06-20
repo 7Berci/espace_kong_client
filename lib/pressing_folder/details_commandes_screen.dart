@@ -39,7 +39,7 @@ class CommandeDetailsScreen extends StatelessWidget {
                       r'(https:\/\/console\.firebase\.google\.com\/[^\s]+)',
                     );
                     final match = uriRegExp.firstMatch(errorMsg);
-                    final url = match != null ? match.group(0) : null;
+                    final url = match?.group(0);
                     return Padding(
                       padding: const EdgeInsets.all(24.0),
                       child: Column(

@@ -119,10 +119,10 @@ class TarifsView extends State<Tarifs> {
                                   ),
                                 ),
                               );
-                            }).toList(),
+                            }),
                           ],
                         );
-                      }).toList(),
+                      }),
                     ],
                   );
                 }).toList(),
